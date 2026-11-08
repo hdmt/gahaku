@@ -1,0 +1,11 @@
+{
+  "name": "gahaku",
+  "owner": { "name": "hdmt" },
+  "plugins": [
+    {
+      "name": "gahaku",
+      "source": "./",
+      "description": "OpenAI の画像 API で、ブログのアイキャッチやサイトの画像素材を作る"
+    }
+  ]
+}

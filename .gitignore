@@ -1,0 +1,26 @@
+# 秘密情報
+.env
+.env.*
+
+# 生成物（examples/ の画像だけは残す）
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.csv
+!examples/**/*.png
+!examples/**/*.jpg
+!examples/**/*.webp
+output/
+out/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+
+.DS_Store
