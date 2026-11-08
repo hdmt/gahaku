@@ -5,5 +5,5 @@
   "author": { "name": "hdmt" },
   "repository": "https://github.com/hdmt/gahaku",
   "license": "MIT",
-  "keywords": ["image", "eyecatch", "blog", "openai", "gpt-image"]
+  "keywords": ["image", "featured-image", "thumbnail", "eyecatch", "blog", "openai", "gpt-image"]
 }

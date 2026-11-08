@@ -2,14 +2,14 @@
 
 English | [日本語](README_ja.md)
 
-A Claude Code plugin that generates images with the OpenAI Images API — blog eyecatches with rendered titles (including Japanese), and website assets such as hero images, backgrounds and illustrations.
+A Claude Code plugin that generates images with the OpenAI Images API — blog featured images (post thumbnails) with the title rendered on them (Japanese supported), and website assets such as hero images, backgrounds and illustrations.
 
 *Gahaku* (画伯) is Japanese for "master painter".
 
 Ask Claude Code something like:
 
 ```
-Make an eyecatch image for the article "How to Start Working from Home | Tools and Setup", with the title on it.
+Make a featured image for the blog post "How to Start Working from Home | Tools and Setup", with the title on it.
 ```
 
 and it will:
@@ -43,8 +43,8 @@ A restricted key that only allows Images (`/v1/images`) is enough.
 ## Using generate.py directly
 
 ```bash
-python3 skills/gahaku/generate.py --out eyecatch.png --size 1200x800 --n 2 <<'EOF'
-A blog eyecatch image ...
+python3 skills/gahaku/generate.py --out featured.png --size 1200x800 --n 2 <<'EOF'
+A featured image for a blog post ...
 EOF
 ```
 
@@ -62,7 +62,7 @@ EOF
 The result is printed as JSON:
 
 ```json
-{"files": ["eyecatch-1.png", "eyecatch-2.png"], "model": "gpt-image-2.5-sunburst", "size": "1200x800",
+{"files": ["featured-1.png", "featured-2.png"], "model": "gpt-image-2.5-sunburst", "size": "1200x800",
  "quality": "high", "usage": {"text_in": 330, "image_in": 0, "image_out": 4200}, "usd": 0.12765}
 ```
 

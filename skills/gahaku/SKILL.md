@@ -1,6 +1,6 @@
 ---
 name: gahaku
-description: OpenAI の画像 API で画像を作る。ブログのアイキャッチ（記事タイトルの文字入り）、サイトのヒーロー画像・背景・挿絵・透過イラストなどに使う。「アイキャッチ作って」「サムネ画像」「記事の画像」「サイトの画像」「挿絵」のように、画像が要るときに使う。文字を入れた画像は、Claude Code が1文字ずつ照合してから渡す。
+description: OpenAI の画像 API で画像を作る。ブログのアイキャッチ（記事タイトルの文字入り）、サイトのヒーロー画像・背景・挿絵・透過イラストなどに使う。「アイキャッチ作って」「サムネ画像」「記事の画像」「サイトの画像」「挿絵」、英語なら featured image・thumbnail・hero image のように、画像が要るときに使う。文字を入れた画像は、Claude Code が1文字ずつ照合してから渡す。
 ---
 
 # 画像の作成
@@ -29,7 +29,7 @@ API キーは環境変数 `OPENAI_API_KEY` か `~/.config/gahaku/.env`（`OPENAI
 英語で書き、入れる文字だけは日本語のまま `"..."` で囲み、文字数を添える。
 
 ```
-A blog eyecatch image for an article titled "{記事タイトル}".
+A featured (header) image for a blog post titled "{記事タイトル}".
 
 Scene: {何が写っているか。被写体は1〜2つ}
 Style: {写真かイラストか、光、色、雰囲気}
