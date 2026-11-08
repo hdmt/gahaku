@@ -1,42 +1,46 @@
-# gahaku（画伯）
+# gahaku
 
-Claude Code から OpenAI の画像 API で画像を作るプラグインです。ブログのアイキャッチ（タイトルの文字入り）や、サイトの画像素材に使えます。
+English | [日本語](README_ja.md)
 
-> A Claude Code plugin that generates images (blog eyecatches with Japanese titles, website assets) via the OpenAI Images API, and has Claude proofread the rendered text.
+A Claude Code plugin that generates images with the OpenAI Images API — blog eyecatches with rendered titles (including Japanese), and website assets such as hero images, backgrounds and illustrations.
+
+*Gahaku* (画伯) is Japanese for "master painter".
+
+Ask Claude Code something like:
 
 ```
-アイキャッチ画像作って。記事タイトル「〇〇」に沿った内容で、テキストも入れて
+Make an eyecatch image for the article "How to Start Working from Home | Tools and Setup", with the title on it.
 ```
 
-と頼むと、Claude Code が次のように進めます。
+and it will:
 
-1. タイトルから絵の内容と文字の入れ方を考え、プロンプトを書く
-2. `generate.py` が OpenAI の画像 API を呼び、画像を保存する
-3. 画像の文字を1文字ずつ照合し、誤字があれば作り直す
+1. Work out the scene and the title layout from the article title, and write the prompt
+2. Call the OpenAI Images API through `generate.py` and save the image
+3. Read the text in the image character by character, compare it with the requested title, and regenerate if there is a typo
 
-## インストール
+## Install
 
-Claude Code の中で実行します。
+In Claude Code:
 
 ```
 /plugin marketplace add hdmt/gahaku
 /plugin install gahaku@gahaku
 ```
 
-必要なのは Python 3.10 以上だけです（`generate.py` は標準ライブラリで動きます）。
+The only requirement is Python 3.10+ (`generate.py` uses the standard library only).
 
-### API キー
+### API key
 
-環境変数 `OPENAI_API_KEY`、無ければ `~/.config/gahaku/.env` から読みます。
+The key is read from the `OPENAI_API_KEY` environment variable, or from `~/.config/gahaku/.env`.
 
 ```bash
 mkdir -p ~/.config/gahaku && touch ~/.config/gahaku/.env && chmod 600 ~/.config/gahaku/.env
-# ~/.config/gahaku/.env に OPENAI_API_KEY=sk-... と書く
+# then add a line: OPENAI_API_KEY=sk-...
 ```
 
-キーの権限は Restricted で、Images（`/v1/images`）だけ許可すれば足ります。
+A restricted key that only allows Images (`/v1/images`) is enough.
 
-## generate.py だけ使う
+## Using generate.py directly
 
 ```bash
 python3 skills/gahaku/generate.py --out eyecatch.png --size 1200x800 --n 2 <<'EOF'
@@ -44,32 +48,32 @@ A blog eyecatch image ...
 EOF
 ```
 
-| オプション | 中身 |
+| Option | Description |
 |---|---|
-| `--out` | 保存先（.png / .webp / .jpg）。`--n 2` 以上なら `-1`, `-2` を付ける |
-| `--prompt` | プロンプト。省略時は標準入力から読む |
-| `--size` | `WIDTHxHEIGHT`。幅・高さは16の倍数、縦横比1:3〜3:1。既定 `1536x1024` |
-| `--n` | 枚数（1〜10） |
-| `--ref` | 参考画像（複数可）。デザインやトーンを揃える |
-| `--quality` | `low` / `medium` / `high`（既定）/ `xhigh` / `max` / `auto` |
-| `--model` | 既定 `gpt-image-2.5-sunburst` |
+| `--out` | Output path (.png / .webp / .jpg). With `--n 2` or more, `-1`, `-2`, … are appended |
+| `--prompt` | The prompt. Read from stdin if omitted |
+| `--size` | `WIDTHxHEIGHT`. Both sides must be multiples of 16, aspect ratio between 1:3 and 3:1. Default `1536x1024` |
+| `--n` | Number of images (1–10) |
+| `--ref` | Reference image(s) to match design or tone. Can be repeated |
+| `--quality` | `low` / `medium` / `high` (default) / `xhigh` / `max` / `auto` |
+| `--model` | Default `gpt-image-2.5-sunburst` |
 | `--background` | `transparent` / `opaque` / `auto` |
 
-結果は JSON で出ます。
+The result is printed as JSON:
 
 ```json
 {"files": ["eyecatch-1.png", "eyecatch-2.png"], "model": "gpt-image-2.5-sunburst", "size": "1200x800",
  "quality": "high", "usage": {"text_in": 330, "image_in": 0, "image_out": 4200}, "usd": 0.12765}
 ```
 
-`usd` は、使用トークンに料金（`generate.py` の `RATE`）を掛けた概算です。
+`usd` is an estimate: token usage multiplied by the rates in `RATE` in `generate.py`.
 
-## 注意
+## Notes
 
-- **OpenAI の API の利用料は、使う人の負担です**
-- 画像の文字はモデルが描くため、誤字が出ることがあります。Claude Code が照合しますが、見落としはありえます。**公開前に、必ず人が文字を確認してください**
-- 実在の人物・企業ロゴ・ブランドを描かせないでください
+- **You pay for your own OpenAI API usage.**
+- Text in the image is drawn by the model and can contain typos. Claude Code proofreads it, but may still miss something. **Always have a person check the text before publishing.**
+- Do not ask for real people, company logos or brands.
 
-## ライセンス
+## License
 
 MIT
