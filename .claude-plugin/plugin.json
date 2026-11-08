@@ -1,7 +1,7 @@
 {
   "name": "gahaku",
-  "version": "0.1.0",
-  "description": "OpenAI の画像 API で、ブログのアイキャッチ（タイトル入り）やサイトの画像素材を作る。タイトルの文字は Claude Code が1文字ずつ照合する",
+  "version": "0.2.0",
+  "description": "OpenAI の画像 API で、ブログのアイキャッチ（タイトル入り）やサイトの画像を作る。文字は Claude Code が1文字ずつ照合する",
   "author": { "name": "hdmt" },
   "repository": "https://github.com/hdmt/gahaku",
   "license": "MIT",
